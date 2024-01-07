@@ -1,0 +1,686 @@
+<!-- /*
+* Template Name: Property
+* Template Author: Untree.co
+* Template URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Untree.co" />
+    <link rel="shortcut icon" href="favicon.png" />
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="bootstrap, bootstrap5" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="fonts/icomoon/style.css" />
+    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
+
+    <link rel="stylesheet" href="css/tiny-slider.css" />
+    <link rel="stylesheet" href="css/aos.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <title>
+      HomePage
+    </title>
+  </head>
+  <body>
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close">
+          <span class="icofont-close js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <nav class="site-nav">
+      <div class="container">
+        <div class="menu-bg-wrap">
+          <div class="site-navigation">
+            <a href="index.html" class="logo m-0 float-start">Property</a>
+
+            <ul
+              class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end"
+            >
+              <li class="active"><a href="index.html">Home</a></li>
+              
+                  <li><a href="career.html">Career</a></li>
+                 
+              <li><a href="services.html">Services</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="login.html">Login</a></li>
+            </ul>
+              
+            <a
+              href="#"
+              class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none"
+              data-toggle="collapse"
+              data-target="#main-navbar"
+            >
+              <span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <div class="hero-slide">
+        <div
+          class="img overlay"
+          style="background-image: url('images/hero_bg_3.jpg')"
+        ></div>
+        <div
+          class="img overlay"
+          style="background-image: url('images/hero_bg_2.jpg')"
+        ></div>
+        <div
+          class="img overlay"
+          style="background-image: url('images/hero_bg_1.jpg')"
+        ></div>
+      </div>
+
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-lg-9 text-center">
+            <h1 class="heading" data-aos="fade-up">
+              Easiest way to find your dream home
+            </h1>
+            <script>
+              document.addEventListener('DOMContentLoaded', function () {
+                  // Get the form element
+                  var searchForm = document.getElementById('search-form');
+      
+                  // Attach a submit event listener to the form
+                  searchForm.addEventListener('submit', function (event) {
+                      // Get the input field
+                      var searchInput = document.getElementById('search-input');
+      
+                      // Check if the input value is not empty
+                      if (searchInput.value.trim() === '') {
+                          // Prevent the form from being submitted
+                          event.preventDefault();
+                      }
+                  });
+              });
+          </script>
+      </head>
+      
+          <form
+              action="search.php"
+              method="post"
+              class="narrow-w form-search d-flex align-items-stretch mb-3"
+              data-aos="fade-up"
+              data-aos-delay="200"
+              id="search-form"
+          >
+              <input
+                  type="text"
+                  name="search"
+                  id="search-input"
+                  class="form-control px-4"
+                  placeholder="Your ZIP code or City. e.g. New York"
+              />
+              <button type="submit" class="btn btn-primary">Search</button>
+          </form>
+        
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="section">
+    <div class="container">
+      <div class="row mb-5 align-items-center">
+        <div class="col-lg-6">
+          <h2 class="font-weight-bold text-primary heading">
+            Popular Properties
+          </h2>
+        </div>
+        <div class="col-lg-6 text-lg-end">
+          <p>
+            <a href="#" target="_blank" class="btn btn-primary text-white py-3 px-4">View all properties</a>
+          </p>
+        </div>
+      </div>
+      <div class="property-list" id="property-list">
+        <!-- Properties will be dynamically added here -->
+      </div>
+      <style>
+        /* Add custom styles for property items */
+        .property-item {
+          max-width: 300px; /* Adjust the maximum width of each item */
+          margin: 20px auto; /* Adjust the margin as needed */
+          padding: 20px;
+          background-color: #f9f9f9; /* Example background color */
+          border: 1px solid #ddd; /* Example border */
+          box-sizing: border-box;
+        }
+      
+        .property-content {
+          padding: 10px;
+          
+        }
+      
+        .property-list {
+          display: flex;
+        flex-wrap: wrap;
+        gap: 0rem;  
+        }
+        .property-item img {
+  width: 450%; /* Make the image fill the container width */
+  height: 300px; /* Set a fixed height for consistency, adjust as needed */
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
+}
+
+      </style>
+     
+     
+        
+      <!-- Include jQuery and Slick slider JS -->
+      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+      <script src="path/to/slick.min.js"></script>
+      
+      <!-- Your existing property slider script -->
+      <script>
+        $(document).ready(function () {
+          // Fetch property data from the server
+          $.ajax({
+            type: 'GET',
+            url: 'get_properties.php', // Replace with the actual URL to fetch properties
+            success: function (data) {
+              // Parse the JSON data received from the server
+              var properties = JSON.parse(data);
+      
+              // Get the property list container
+              var propertyList = $('#property-list');
+      
+              // Loop through each property and dynamically create list items
+              properties.forEach(function (property) {
+                var propertyItem = `
+                  <div class="property-item">
+                    <a href="property-single.html?property_id=${property.id}" class="img">
+                      <img src="${property.image_url}" alt="Image" class="img-fluid" />
+                    </a>
+                    <div class="property-content">
+                      <div class="price mb-2"><span>${property.price}</span></div>
+                      <div>
+                        <span class="d-block mb-2 text-black-50">${property.address}</span>
+                        <span class="city d-block mb-3">${property.city}</span>
+                        <div class="specs d-flex mb-4">
+                          <span class="d-block d-flex align-items-center me-3">
+                            <span class="icon-bed me-2"></span>
+                            <span class="caption">${property.beds} beds</span>
+                          </span>
+                          <span class="d-block d-flex align-items-center">
+                            <span class="icon-bath me-2"></span>
+                            <span class="caption">${property.baths} baths</span>
+                          </span>
+                        </div>
+                        <a href="property-single.html?property_id=${property.id}" class="btn btn-primary py-2 px-3">See details</a>
+                      </div>
+                    </div>
+                  </div>
+                `;
+                propertyList.append(propertyItem);
+              });
+            },
+            error: function (error) {
+              console.log('Error:', error);
+            }
+          });
+        });
+      </script>
+        
+
+    <section class="features-1">
+      <div class="container">
+        <div class="row">
+          <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+            <div class="box-feature">
+              <span class="flaticon-house"></span>
+              <h3 class="mb-3">Our Properties</h3>
+              <p>
+                Our properties are more than 100 and our customer love our property and 99% are all selled
+              </p>
+              <p><a href="properties.html" class="learn-more">Learn More</a></p>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="500">
+            <div class="box-feature">
+              <span class="flaticon-building"></span>
+              <h3 class="mb-3">Property for Sale</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Voluptates, accusamus.
+              </p>
+              <p><a href="#" class="learn-more">Learn More</a></p>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+            <div class="box-feature">
+              <span class="flaticon-house-3"></span>
+              <h3 class="mb-3">Real Estate Agent</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Voluptates, accusamus.
+              </p>
+              <p><a href="#" class="learn-more">Learn More</a></p>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="600">
+            <div class="box-feature">
+              <span class="flaticon-house-1"></span>
+              <h3 class="mb-3">House for Sale</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Voluptates, accusamus.
+              </p>
+              <p><a href="#" class="learn-more">Learn More</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="section sec-testimonials">
+      <div class="container">
+        <div class="row mb-5 align-items-center">
+          <div class="col-md-6">
+            <h2 class="font-weight-bold heading text-primary mb-4 mb-md-0">
+              Tell Us Your FeedBack
+            </h2>
+          </div>
+          <!-- Add this form where users can submit their feedback -->
+<form id="feedbackForm" >
+  <div class="form-group">
+    <label for="userName">Your Name:</label>
+    <input type="text" class="form-control" id="userName" required>
+  </div>
+  <div class="form-group">
+    <label for="userRating">Rating:</label>
+    <select class="form-control" id="userRating"  required>
+      <option value="1">1 Star</option>
+      <option value="2">2 Stars</option>
+      <option value="3">3 Stars</option>
+      <option value="4">4 Stars</option>
+      <option value="5">5 Stars</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="userFeedback">Your Feedback:</label>
+    <textarea class="form-control" id="userFeedback" rows="3" required></textarea>
+  </div>
+  <button type="button" class="btn btn-primary" onclick="submitFeedback()">Submit Feedback</button>
+</form>
+
+
+<script>
+   function submitFeedback() {
+      var userName = document.getElementById('userName').value;
+      var userRating = document.getElementById('userRating').value;
+      var userFeedback = document.getElementById('userFeedback').value;
+
+      // Send data to the PHP script using Ajax
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "feedback.php", true);
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          var response = JSON.parse(xhr.responseText);
+          alert(response.message);
+
+          // Clear the form fields
+          document.getElementById('userName').value = '';
+          document.getElementById('userRating').value = '1';
+          document.getElementById('userFeedback').value = '';
+        }
+      };
+
+      var data = "userName=" + encodeURIComponent(userName) +
+        "&userRating=" + encodeURIComponent(userRating) +
+        "&userFeedback=" + encodeURIComponent(userFeedback);
+
+      xhr.send(data);
+    }
+</script>
+
+
+
+    <div class="section section-4 bg-light">
+      <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+          <div class="col-lg-5">
+            <h2 class="font-weight-bold heading text-primary mb-4">
+              Let's find home that's perfect for you
+            </h2>
+            <p class="text-black-50">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
+              enim pariatur similique debitis vel nisi qui reprehenderit.
+            </p>
+          </div>
+        </div>
+        <div class="row justify-content-between mb-5">
+          <div class="col-lg-7 mb-5 mb-lg-0 order-lg-2">
+            <div class="img-about dots">
+              <img src="images/hero_bg_3.jpg" alt="Image" class="img-fluid" />
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="d-flex feature-h">
+              <span class="wrap-icon me-3">
+                <span class="icon-home2"></span>
+              </span>
+              <div class="feature-text">
+                <h3 class="heading">2M Properties</h3>
+                <p class="text-black-50">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Nostrum iste.
+                </p>
+              </div>
+            </div>
+
+            <div class="d-flex feature-h">
+              <span class="wrap-icon me-3">
+                <span class="icon-person"></span>
+              </span>
+              <div class="feature-text">
+                <h3 class="heading">Top Rated Agents</h3>
+                <p class="text-black-50">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Nostrum iste.
+                </p>
+              </div>
+            </div>
+
+            <div class="d-flex feature-h">
+              <span class="wrap-icon me-3">
+                <span class="icon-security"></span>
+              </span>
+              <div class="feature-text">
+                <h3 class="heading">Legit Properties</h3>
+                <p class="text-black-50">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Nostrum iste.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row section-counter mt-5">
+          <div
+            class="col-6 col-sm-6 col-md-6 col-lg-3"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <div class="counter-wrap mb-5 mb-lg-0">
+              <span class="number"
+                ><span class="countup text-primary">3298</span></span
+              >
+              <span class="caption text-black-50"># of Buy Properties</span>
+            </div>
+          </div>
+          <div
+            class="col-6 col-sm-6 col-md-6 col-lg-3"
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
+            <div class="counter-wrap mb-5 mb-lg-0">
+              <span class="number"
+                ><span class="countup text-primary">2181</span></span
+              >
+              <span class="caption text-black-50"># of Sell Properties</span>
+            </div>
+          </div>
+          <div
+            class="col-6 col-sm-6 col-md-6 col-lg-3"
+            data-aos="fade-up"
+            data-aos-delay="500"
+          >
+            <div class="counter-wrap mb-5 mb-lg-0">
+              <span class="number"
+                ><span class="countup text-primary">9316</span></span
+              >
+              <span class="caption text-black-50"># of All Properties</span>
+            </div>
+          </div>
+          <div
+            class="col-6 col-sm-6 col-md-6 col-lg-3"
+            data-aos="fade-up"
+            data-aos-delay="600"
+          >
+            <div class="counter-wrap mb-5 mb-lg-0">
+              <span class="number"
+                ><span class="countup text-primary">7191</span></span
+              >
+              <span class="caption text-black-50"># of Agents</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="row justify-content-center footer-cta" data-aos="fade-up">
+        <div class="col-lg-7 mx-auto text-center">
+          <h2 class="mb-4">Be a part of our growing real state agents</h2>
+          <p>
+            <a
+              href="career.html"
+              target="_blank"
+              class="btn btn-primary text-white py-3 px-4"
+              >Apply For Job</a
+            >
+          </p>
+        </div>
+        <!-- /.col-lg-7 -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <div class="section section-5 bg-light">
+      <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+          <div class="col-lg-6 mb-5">
+            <h2 class="font-weight-bold heading text-primary mb-4">
+              Our Agents
+            </h2>
+            <div class="container" id="agentContainer">
+              <!-- Agent data will be dynamically loaded here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+    <script>
+      $(document).ready(function () {
+        // Fetch agent data on page load
+        $.ajax({
+          type: 'GET',
+          url: 'getagent.php', // Replace with the actual URL to fetch agent data
+          dataType: 'json', // Expect JSON data from the server
+          success: function (data) {
+            // Check if the received data is an array
+            if (Array.isArray(data)) {
+              // Get the agent container
+              var agentContainer = $('#agentContainer');
+    
+              // Display the agent data dynamically
+              data.forEach(function (agent) {
+                agentContainer.append(`
+                <div class="pro-item">
+                  <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
+                    <div class="h-100 person">
+                      <img src="${agent.image_url}" alt="${agent.name}" class="img-fluid">
+                      <div class="person-contents">
+                        <h2 class="mb-0"><a href="#">${agent.name}</a></h2>
+
+                        <span class="meta d-block mb-3">${agent.major}</span>
+                        <span class="meta d-block mb-3">${agent.email}</span>
+                        <p>${agent.description}</p>
+                       
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                `);
+              });
+            } else {
+              console.log('Invalid data format received.');
+            }
+          },
+          error: function (xhr, status, error) {
+            console.log('Error:', status, error);
+          }
+        });
+      });
+    </script>
+ <style>
+  
+
+  /* Styles for Each Agent Item */
+  .person {
+    display: flex;
+    align-items: center;
+    padding-bottom: 0px;
+  }
+
+  /* Additional Styles for Agent Content */
+  .person-contents {
+    text-align: center;
+  }
+
+  .person img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px; /* Add rounded corners if desired */
+    margin-bottom: 10px; /* Adjust as needed */
+  }
+</style>
+
+
+    <div class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Contact</h3>
+              <address>3307 Lebanon,Hamra</address>
+              <ul class="list-unstyled links">
+                <li><a href="tel://11234567890">+961 74858525</a></li>
+                <li><a href="tel://11234567890">+961 01236595</a></li>
+                <li>
+                  <a href="mailto:info@mydomain.com">info@zeinab.com</a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Sources</h3>
+              <ul class="list-unstyled float-start links">
+                <li><a href="about.html">About us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Privacy</a></li>
+              </ul>
+              <ul class="list-unstyled float-start links">
+                <li><a href="career.html">Careers</a></li>
+              
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Links</h3>
+              <ul class="list-unstyled links">
+                <li><a href="about.html">About us</a></li>
+                <li><a href="contact.html">Contact us</a></li>
+              </ul>
+
+              <ul class="list-unstyled social">
+                <li>
+                  <a href="#"><span class="icon-instagram"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-twitter"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-facebook"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-linkedin"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-pinterest"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-dribbble"></span></a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /.col-lg-4 -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row mt-5">
+          <div class="col-12 text-center">
+            <!-- 
+              **==========
+              NOTE: 
+              Please don't remove this copyright link unless you buy the license here https://untree.co/license/  
+              **==========
+            -->
+
+            <p>
+              Copyright &copy;
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              . All Rights Reserved. &mdash; Designed with love by
+              <a href="https://untree.co">Untree.co</a>
+              <!-- License information: https://untree.co/license/ -->
+            </p>
+            <div>
+              Distributed by
+              <a href="https://themewagon.com/" target="_blank">themewagon</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container -->
+    </div>
+    <!-- /.site-footer -->
+
+    <!-- Preloader -->
+    <div id="overlayer"></div>
+    <div class="loader">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/tiny-slider.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/counter.js"></script>
+    <script src="js/custom.js"></script>
+  </body>
+</html>

@@ -1,0 +1,120 @@
+<!-- Add Agent Form -->
+<div class="container">
+    <h2>Add Agent</h2>
+    <form id="addAgentForm">
+      <label for="adminAgentName">Agent Name:</label>
+      <input type="text" id="adminAgentName" name="adminAgentName" required>
+  
+      <label for="adminAgentImageURL">Image URL:</label>
+      <input type="text" id="adminAgentImageURL" name="adminAgentImageURL" required>
+  
+      <label for="adminAgentMajor">Major:</label>
+      <input type="text" id="adminAgentMajor" name="adminAgentMajor" required>
+  
+      <label for="adminAgentEmail">Email:</label>
+      <input type="email" id="adminAgentEmail" name="adminAgentEmail" required>
+  
+      <!-- Add description input field -->
+      <label for="adminAgentDescription">Description:</label>
+      <textarea id="adminAgentDescription" name="adminAgentDescription" required></textarea>
+  <br>
+      <button type="submit">Add Agent</button>
+    </form>
+  </div>
+  
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#addAgentForm').submit(function (event) {
+      event.preventDefault();
+
+      // Get agent details from the form
+      var agentName = $('#adminAgentName').val();
+      var agentImageURL = $('#adminAgentImageURL').val();
+      var agentMajor = $('#adminAgentMajor').val();
+      var agentEmail = $('#adminAgentEmail').val();
+      var agentDescription = $('#adminAgentDescription').val(); // New line for description
+
+      // Validate if required fields are not empty
+      if (!agentName || !agentImageURL || !agentMajor || !agentEmail || !agentDescription) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+
+      // Send form data to the backend
+      $.ajax({
+        type: 'POST',
+        url: 'addagent.php', // Replace with the actual URL to handle the data on the server
+        data: {
+          adminAgentName: agentName,
+          adminAgentImageURL: agentImageURL,
+          adminAgentMajor: agentMajor,
+          adminAgentEmail: agentEmail,
+          adminAgentDescription: agentDescription // New line for description
+        },
+        success: function (response) {
+          var result = JSON.parse(response);
+
+          if (result.status === 'success') {
+            // Agent added successfully
+            alert('Agent added successfully!');
+          } else {
+            // Error adding agent
+            alert('Error adding agent: ' + result.message);
+          }
+        },
+        error: function (error) {
+          console.log('Error:', error);
+        }
+      });
+
+      // Clear the form fields after submission
+      $('#adminAgentName, #adminAgentImageURL, #adminAgentMajor, #adminAgentEmail, #adminAgentDescription').val('');
+    });
+  });
+</script>
+<style>/* Add Agent Form Styles */
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    label {
+      margin-bottom: 8px;
+      color: #333;
+    }
+    
+    input {
+      padding: 8px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    button {
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background-color: #0056b3;
+    }
+    </style>  

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Agent</title>
+</head>
+<body>
+  <div class="container">
+    <h2>Delete Agent</h2>
+    <form id="deleteAgentForm">
+      <select id="agentName" name="agentName" required>
+        <!-- Agent names will be dynamically loaded here -->
+      </select>
+      <button type="submit">Delete Agent</button>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      // Fetch agent names on page load
+      $.ajax({
+        type: 'GET',
+        url: 'getagentname.php', // Replace with the actual URL to fetch agent names
+        dataType: 'json', // Expect JSON data from the server
+        success: function (data) {
+          // Check if the received data is an array
+          if (Array.isArray(data)) {
+            // Get the agent name select element
+            var agentNameSelect = $('#agentName');
+
+            // Populate the select options dynamically
+            data.forEach(function (agentName) {
+              agentNameSelect.append(`<option value="${agentName}">${agentName}</option>`);
+            });
+          } else {
+            console.log('Invalid data format received.');
+          }
+        },
+        error: function (xhr, status, error) {
+          console.log('Error:', status, error);
+        }
+      });
+
+      // Handle form submission
+      $('#deleteAgentForm').submit(function (event) {
+        event.preventDefault();
+
+        // Get selected agent name
+        var selectedAgentName = $('#agentName').val();
+
+        // Confirm deletion
+        var confirmDelete = confirm(`Are you sure you want to delete the agent '${selectedAgentName}'?`);
+
+        if (confirmDelete) {
+          // Send selected agent name to the backend for deletion
+          $.ajax({
+            type: 'POST',
+            url: 'deleteagent.php', // Replace with the actual URL to handle the deletion on the server
+            data: { agentName: selectedAgentName },
+            success: function (response) {
+              var result = JSON.parse(response);
+
+              if (result.status === 'success') {
+                alert('Agent deleted successfully!');
+                // Redirect to the same page with a query parameter to indicate successful deletion
+                window.location.reload();
+                          } else {
+                alert('Error deleting agent: ' + result.message);
+              }
+            },
+            error: function (error) {
+              console.log('Error:', error);
+            }
+          });
+        }
+      });
+    });
+  </script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    select {
+      padding: 8px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #fff;
+      color: #333;
+      cursor: pointer;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #c82333;
+    }
+  </style>
+</body>
+</html>

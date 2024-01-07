@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include flatpickr library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>Schedule a Meeting</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #495057;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .timepicker {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Schedule a Meeting</h2>
+        
+        <!-- Date and Time Pickers -->
+        <form id="guestDetailsForm" action="schedule.php" method="post">
+            <label for="meeting_date">Select Meeting Date:</label>
+            <input type="text" id="meeting_date" class="datepicker" placeholder="Click to select date">
+       
+            <label for="meeting_time">Select Meeting Time:</label>
+            <input type="text" id="meeting_time" class="timepicker" placeholder="Click to select time">
+
+            <!-- Guest Details Form -->
+            <label for="guestName">Your Name:</label>
+            <input type="text" id="guest_name" name="name" required>
+
+            <label for="guestEmail">Your Email:</label>
+            <input type="email" id="guest_email" name="email" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- Initialize flatpickr for date and time -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            flatpickr('#meeting_date', {
+                enableTime: false,
+                minDate: 'today',
+                dateFormat: 'Y-m-d',
+            });
+
+            flatpickr('#meeting_time', {
+                enableTime: true,
+                noCalendar: true,
+                dateFormat: 'H:i',
+                minTime: '08:00',
+                maxTime: '20:00',
+                altInput: true,
+                altFormat: 'h:i K'
+            });
+            document.getElementById('guestDetailsForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const meetingDate = document.getElementById('meeting_date').value;
+    const meetingTime = document.getElementById('meeting_time').value;
+    const guestName = document.getElementById('guest_name').value;
+    const guestEmail = document.getElementById('guest_email').value;
+
+    // AJAX request to submit the form data
+    $.ajax({
+        type: 'POST',
+        url: 'schedule.php',
+        data: {
+            meeting_date: meetingDate,
+            meeting_time: meetingTime,
+            guest_name: guestName,
+            guest_email: guestEmail
+        },
+        success: function (response) {
+            var result = JSON.parse(response);
+            if (result.success) {
+                // Show alert on success
+                alert(' Done! You Schedulated A Meeting');
+
+                // Redirect to property_single.html
+                window.location.href = 'index.html';
+            } else {
+                // Show alert on error
+                alert('Error scheduling the meeting. Please try again. ' + result.error);
+            }
+        },
+        error: function (error) {
+            console.log('Error:', error);
+        }
+    });
+});
+
+});
+
+    </script>
+
+</body>
+</html>

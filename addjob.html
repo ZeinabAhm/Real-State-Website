@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Job </title>
+</head>
+
+<body>
+    <h1>Add Job Listing</h1>
+    <form action="addjob.php"id="addJobForm" method="post">
+        <label for="jobTitle">Job Title:</label>
+        <input type="text" name="jobTitle" required><br>
+
+        <label for="jobDetails">Job Details:</label>
+        <textarea name="jobDetails" required></textarea><br>
+
+        <label for="salary">Salary:</label>
+        <input type="text" name="salary" required><br>
+
+        <label for="place">Place:</label>
+        <input type="text" name="place" required><br>
+
+        <label for="type">Employment Type:</label>
+        <select name="type" required>
+            <option value="part-time">Part-Time</option>
+            <option value="full-time">Full-Time</option>
+            <option value="intern">Intern</option>
+        </select><br>
+
+        <label for="experience">Experience Level:</label>
+        <select name="experience" required>
+            <option value="entry">Entry Level</option>
+            <option value="mid">Mid Level</option>
+            <option value="senior">Senior Level</option>
+        </select><br>
+        <button type="submit">Add Job</button>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#addJobForm').submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: 'addjob.php',
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        alert('job added successfully!');
+                        // You can redirect or perform other actions as needed
+                        window.location.href = 'addjob.html';
+                    },
+                    error: function (error) {
+                        console.log('Error:', error);
+                    }
+                });
+            });
+        });
+    </script>
+</body><style>
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #ff0000;
+    
+}
+
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #fc1515;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #861919;
+}
+</style>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Add your head content here -->
+</head>
+<style>
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+  #updateJobForm {
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  select, input, textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  button {
+    display: block;
+    width: 100%;
+    background-color: #ff2600;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #952d29;
+  }
+
+  h1 {
+    text-align: center;
+    color: #d41f1f;
+    font-size: 28px;
+    position: relative;
+  }
+</style>
+<body>
+  <form id="updateJobForm">
+    <h1>Update a Job</h1>
+   <!-- Change name attribute from 'job_id' to 'jobId' -->
+<select name="jobId" id="job_id" required>
+  <!-- Options will be dynamically added here -->
+</select>
+
+    <input type="text" name="jobTitle" placeholder="New Job Title" required>
+    <textarea name="jobDetails" placeholder="New Job Details" required></textarea>
+    <input type="text" name="salary" placeholder="New Salary" required>
+    <input type="text" name="place" placeholder="New Place" required>
+    <select name="type" required>
+      <option value="part-time">Part-Time</option>
+      <option value="full-time">Full-Time</option>
+      <option value="intern">Intern</option>
+    </select>
+    <select name="experience" required>
+      <option value="entry">Entry Level</option>
+      <option value="mid">Mid Level</option>
+      <option value="senior">Senior Level</option>
+    </select>
+
+    <button type="button" id="updateJobBtn">Update Job</button>
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      // Fetch job data from the server
+      $.ajax({
+        type: 'GET',
+        url: 'get_job.php', // Replace with the actual URL to fetch jobs
+        success: function (data) {
+          // Parse the JSON data received from the server
+          var jobs = JSON.parse(data);
+
+          // Get the job select element
+          var jobSelect = $('#job_id');
+
+          // Loop through each job and dynamically create options
+          jobs.forEach(function (job) {
+            var option = $('<option>').val(job.id).text(job.jobTitle);
+            jobSelect.append(option);
+          });
+        },
+        error: function (error) {
+          console.log('Error:', error);
+        }
+      });
+
+      // Attach click event to update button
+      $('#updateJobBtn').click(function () {
+        var jobId = $('#job_id').val();
+        var newJobTitle = $('input[name="jobTitle"]').val();
+        var newJobDetails = $('textarea[name="jobDetails"]').val();
+        var newSalary = $('input[name="salary"]').val();
+        var newPlace = $('input[name="place"]').val();
+        var newType = $('select[name="type"]').val();
+        var newExperience = $('select[name="experience"]').val();
+
+        // Send AJAX request to update job
+        $.ajax({
+          type: 'POST',
+          url: 'updatejob.php',
+          data: {
+            job_id: jobId,
+            jobTitle: newJobTitle,
+            jobDetails: newJobDetails,
+            salary: newSalary,
+            place: newPlace,
+            typeofwork: newType,
+            experience: newExperience
+          },
+          success: function (response) {
+            alert('Job updated successfully!');
+            // You can redirect or perform other actions as needed
+            window.location.reload();
+          },
+          error: function (error) {
+            console.log('Error:', error);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

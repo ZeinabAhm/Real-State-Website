@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Add your head content here -->
+</head>
+<style>
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  #updatePropertyForm {
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  select, input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  button {
+    display: block;
+    width: 100%;
+    background-color: #ff2600;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #952d29;
+  }
+
+  h1 {
+    text-align: center;
+    color: #d41f1f;
+    font-size: 28px;
+    position: relative;
+  }
+</style>
+<body>
+  <form id="updatePropertyForm">
+    <h1>Update a Property</h1>
+    <select name="property_id" id="property_id" required>
+      <!-- Options will be dynamically added here -->
+    </select>
+    <input type="text" name="address" placeholder="New Property Address" required>
+    <input type="text" name="city" placeholder="New Property City" required>
+    <input type="number" name="price" placeholder="New Property Price" required>
+    <input type="number" name="beds" placeholder="New Number of Beds" required>
+    <input type="number" name="baths" placeholder="New Number of Baths" required>
+    <input type="url" name="image_url" placeholder="New Image URL" required>
+
+    <button type="button" id="updatePropertyBtn">Update Property</button>
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      // Fetch property data from the server
+      $.ajax({
+        type: 'GET',
+        url: 'get_properties.php', // Replace with the actual URL to fetch properties
+        success: function (data) {
+          // Parse the JSON data received from the server
+          var properties = JSON.parse(data);
+
+          // Get the property select element
+          var propertySelect = $('#property_id');
+
+          // Loop through each property and dynamically create options
+          properties.forEach(function (property) {
+            var option = $('<option>').val(property.id).text(property.address);
+            propertySelect.append(option);
+          });
+        },
+        error: function (error) {
+          console.log('Error:', error);
+        }
+      });
+
+      // Attach click event to update button
+      $('#updatePropertyBtn').click(function () {
+        var propertyId = $('#property_id').val();
+        var newAddress = $('input[name="address"]').val();
+        var newCity = $('input[name="city"]').val();
+        var newPrice = $('input[name="price"]').val();
+        var newBeds = $('input[name="beds"]').val();
+        var newBaths = $('input[name="baths"]').val();
+        var newImageUrl = $('input[name="image_url"]').val();
+
+        // Send AJAX request to update property
+        $.ajax({
+          type: 'POST',
+          url: 'updateproperty.php',
+          data: {
+            property_id: propertyId,
+            address: newAddress,
+            city: newCity,
+            price: newPrice,
+            beds: newBeds,
+            baths: newBaths,
+            image_url: newImageUrl
+          },
+          success: function (response) {
+            alert('Property updated successfully!');
+            // You can redirect or perform other actions as needed
+            window.location.reload();
+          },
+          error: function (error) {
+            console.log('Error:', error);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

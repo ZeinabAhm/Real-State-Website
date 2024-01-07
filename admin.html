@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      background-color: #282c34;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .admin-container {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      width: 80%;
+    }
+
+    .admin-card {
+      background-color: #2c3e50;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease;
+      color: #ecf0f1;
+    }
+    .admin-card:hover {
+      transform: scale(1.05);
+    }
+
+    .admin-button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #ffffff;
+      background-color: #3498db;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .admin-button:hover {
+      background-color: #2980b9;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+    @media (max-width: 768px) {
+      .admin-card {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container admin-container">
+    <h1>Admin Panel</h1>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="admin-card">
+          <h2>Add Property</h2>
+          <p>Click below to add a new property.</p>
+          <a href="addproperty.html" class="btn btn-primary admin-button">Add Property</a>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="admin-card">
+          <h2>Delete Property</h2>
+          <p>Click below to delete an existing property.</p>
+          <a href="deleteproperty.html" class="btn btn-warning admin-button">Delete Property</a>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="admin-card">
+          <h2>Update Property</h2>
+          <p>Click below to update property information.</p>
+          <a href="updateproperty.html" class="btn btn-warning admin-button">Update Property</a>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="admin-card">
+          <h2>Add Job</h2>
+          <p>Click below to add a new job.</p>
+          <a href="addjob.html" class="btn btn-success admin-button">Add Job</a>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="admin-card">
+          <h2>Delete Job</h2>
+          <p>Click below to delete an existing job.</p>
+          <a href="deletejob.html" class="btn btn-warning admin-button">Delete Job</a>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="admin-card">
+          <h2>Update Job</h2>
+          <p>Click below to update job information.</p>
+          <a href="updatejob.html" class="btn btn-warning admin-button">Update Job</a>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="admin-card">
+          <h2> View FeedBack</h2>
+          <p>Click below to view customer feedback.</p>
+          <a href="viewfeedback.php" class="btn btn-warning admin-button"> View FeedBack</a>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="admin-card">
+          <h2> Add Agent</h2>
+          <p>Click below to add agent.</p>
+          <a href="addagent.html" class="btn btn-warning admin-button"> Add Agent</a>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="admin-card">
+          <h2> Delete Agent</h2>
+          <p>Click below to delete agent.</p>
+          <a href="deleteagent.html" class="btn btn-warning admin-button"> Delete Agent</a>
+        </div>
+      </div>
+      
+      <div class="col-md-6">
+        <div class="admin-card">
+            <h2>Logout</h2>
+            <p>Click below to logout.</p>
+            <a href="logout.php" class="btn btn-danger admin-button">Logout</a>
+        </div>
+    </div>
+    <style>.btn-danger {
+      background-color: #d9534f;
+      border-color: #d9534f;
+   }
+   
+   .btn-danger:hover {
+      background-color: #c9302c;
+      border-color: #ac2925;
+   }</style>
+    </div>
+  </div>
+  
+</body>
+</html>

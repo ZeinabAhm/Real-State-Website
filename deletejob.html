@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Job</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #deleteJobForm {
+      max-width: 400px;
+      width: 100%;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    select {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      background-color: #ff2600;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #952d29;
+    }
+
+    h1 {
+      text-align: center;
+      color: #d41f1f;
+      font-size: 28px;
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="deleteJobForm">
+    <h1>Delete a Job</h1>
+    <select name="job_id" id="job_id" required>
+      <!-- Options will be dynamically added here -->
+    </select>
+    <button type="button" id="deleteJobBtn">Delete Job</button>
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      // Fetch job data from the server
+      $.ajax({
+        type: 'GET',
+        url: 'get_job.php', // Replace with the actual URL to fetch job details
+        success: function (data) {
+          // Parse the JSON data received from the server
+          var jobs = JSON.parse(data);
+
+          // Get the job select element
+          var jobSelect = $('#job_id');
+
+          // Loop through each job and dynamically create options
+          jobs.forEach(function (job) {
+            var option = $('<option>').val(job.id).text(job.jobTitle);
+            jobSelect.append(option);
+          });
+        },
+        error: function (error) {
+          console.log('Error:', error);
+        }
+      });
+
+      // Attach click event to delete button
+      $('#deleteJobBtn').click(function () {
+        var jobId = $('#job_id').val();
+
+        // Send AJAX request to delete job
+        $.ajax({
+          type: 'POST',
+          url: 'deletejob.php',
+          data: { job_id: jobId },
+          success: function (response) {
+            alert('Job deleted successfully!');
+            // You can redirect or perform other actions as needed
+            window.location.reload();
+          },
+          error: function (error) {
+            console.log('Error:', error);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

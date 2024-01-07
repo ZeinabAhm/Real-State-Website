@@ -1,0 +1,308 @@
+<!-- /*
+* Template Name: Property
+* Template Author: Untree.co
+* Template URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Untree.co" />
+    <link rel="shortcut icon" href="favicon.png" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="bootstrap, bootstrap5" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="fonts/icomoon/style.css" />
+    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
+
+    <link rel="stylesheet" href="css/tiny-slider.css" />
+    <link rel="stylesheet" href="css/aos.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <title>
+        Career
+    </title>
+  </head>
+  <body>
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close">
+          <span class="icofont-close js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <nav class="site-nav">
+      <div class="container">
+        <div class="menu-bg-wrap">
+          <div class="site-navigation">
+            <a href="index.html" class="logo m-0 float-start">Property</a>
+
+            <ul
+              class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end" >
+              <li><a href="index.html">Home</a></li>
+              <li > <a href="properties.html">Properties</a></li> 
+              <li class="active"><a href="career.html">Career</a></li>
+              <li><a href="about.html">About</a></li>
+              <li ><a href="contact.html">Contact Us</a></li>
+              
+            </ul>
+
+            <a
+              href="#"
+              class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none"
+              data-toggle="collapse"
+              data-target="#main-navbar"
+            >
+              <span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div
+      class="hero page-inner overlay"
+      style="background-image: url('images/hero_bg_1.jpg')"
+    >
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-lg-9 text-center mt-5">
+            <h1 class="heading" data-aos="fade-up">Be Part Of Us</h1>
+
+            <nav
+              aria-label="breadcrumb"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <ol class="breadcrumb text-center justify-content-center">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li
+                  class="breadcrumb-item active text-white-50"
+                  aria-current="page"
+                >
+                  Career
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase" data-aos="fade-up" style="color: #357e72;">
+              Current Job Openings
+            </h2>
+          </div>
+        </div>
+        <div class="row" id="jobListingsContainer">
+          <!-- Job listings will be dynamically added here using JavaScript -->
+      </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+      $(document).ready(function () {
+          // Fetch job data from the server
+          $.ajax({
+              type: 'GET',
+              url: 'get_job.php', // Replace with the actual URL to fetch job data
+              dataType: 'json', // Ensure that the expected response is JSON
+              success: function (data) {
+                  // Check if data is an array
+                  if (Array.isArray(data)) {
+                      // Loop through each job and dynamically create job listings
+                      data.forEach(function (job) {
+                          var jobListing = `
+                              <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                                  <div class="job-box">
+                                      <h4 class="job-title">${job.jobTitle}</h4>
+                                      <p class="job-details">${job.jobDetails}</p>
+                                      <p class="job-location">Location: ${job.place}</p>
+                                      <p class="job-type">Employment Type: ${job.type}</p>
+                                      <p class="job-experience">Experience Level: ${job.experience}</p>
+                                      <p class="job-salary">Salary: ${job.salary}</p>
+                                      <a href="apply.php?job_id=${job.id}&job_title=${encodeURIComponent(job.jobTitle)}" class="apply-btn">Apply Now</a>
+                                  </div>
+                              </div>
+                          `;
+                          $('#jobListingsContainer').append(jobListing);
+                      });
+                  } else {
+                      console.error('Invalid data format received:', data);
+                  }
+              },
+              error: function (xhr, status, error) {
+                  console.error('AJAX Error:', status, error);
+              }
+          });
+      });
+  </script><style>
+    .apply-btn {
+        display: block;
+        width: 100%;
+        background-color:teal;
+        color: #fff;
+        padding: 10px 15px;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .apply-btn:hover {
+        background-color: turquoise;
+    }
+        .job-box {
+          background-color: #fff;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          margin: 20px 0;
+          padding: 20px;
+        }
+      
+        .job-title {
+          font-size: 24px;
+          color: #357e72;
+        }
+      
+        .job-details,
+        .job-location,
+        .job-type,
+        .job-experience,
+        .job-salary {
+          margin-bottom: 10px;
+        }
+    
+      </style>
+      
+ <div class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Contact</h3>
+              <address> Lebanon Beirut, Hamara 3077</address>
+              <ul class="list-unstyled links">
+                <li><a href="tel://11234567890">+961 70 777 222</a></li>
+                <li><a href="tel://11234567890">+961 01 777 222</a></li>
+                <li>
+                  <a href="mailto:info@mydomain.com">info@zeinab.com</a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Sources</h3>
+              <ul class="list-unstyled float-start links">
+                <li><a href="about.html">About us</a></li>
+                <li><a href="services.html">Services</a></li>
+              
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Privacy</a></li>
+              </ul>
+              <ul class="list-unstyled float-start links">
+                <li><a href="properties.html">Business</a></li>
+                <li><a href="career.html">Careers</a></li>
+            
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <div class="widget">
+              <h3>Links</h3>
+              <ul class="list-unstyled links">
+                <li><a href="index.html">Our Vision</a></li>
+                <li><a href="about.html">About us</a></li>
+                <li><a href="contact.html">Contact us</a></li>
+              </ul>
+
+              <ul class="list-unstyled social">
+                <li>
+                  <a href="#"><span class="icon-instagram"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-twitter"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-facebook"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-linkedin"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-pinterest"></span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon-dribbble"></span></a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.widget -->
+          </div>
+          <!-- /.col-lg-4 -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row mt-5">
+          <div class="col-12 text-center">
+            <!-- 
+              **==========
+              NOTE: 
+              Please don't remove this copyright link unless you buy the license here https://untree.co/license/  
+              **==========
+            -->
+
+            <p>
+              Copyright &copy;
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              . All Rights Reserved. &mdash; Designed with love by
+              <a href="https://untree.co">Untree.co</a>
+              <!-- License information: https://untree.co/license/ -->
+            </p>
+            <div>
+              Distributed by
+              <a href="https://themewagon.com/" target="_blank">themewagon</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container -->
+    </div>
+    <!-- /.site-footer -->
+
+    <!-- Preloader -->
+    <div id="overlayer"></div>
+    <div class="loader">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/tiny-slider.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/counter.js"></script>
+    <script src="js/custom.js"></script>
+  </body>
+</html>
